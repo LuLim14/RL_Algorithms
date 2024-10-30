@@ -49,7 +49,7 @@ def select_action(current_state: np.ndarray, policy_net: Any) -> tuple[int, Any]
     return action, m.log_prob(torch.tensor(action, dtype=torch.long))
 
 
-def discount_reward(rewards: list[float], gamma: float = 0.99) -> list[float]:
+def discount_reward(rewards: list[float], gamma: float = 0.99) -> deque[float]:
     discounted_reward_at_time = deque()
     current_gamma = gamma
     current_reward = 0
