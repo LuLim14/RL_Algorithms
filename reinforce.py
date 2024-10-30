@@ -59,12 +59,12 @@ def discount_reward(rewards: list[float], gamma: float = 0.99) -> list[float]:
     return (discounted_reward_at_time - np.mean(discounted_reward_at_time)) / np.std(discounted_reward_at_time)
 
 
-def init_weights(layer):
+def init_weights(layer: Any) -> None:
     if isinstance(layer, nn.Linear):
         nn.init.xavier_normal_(layer.weight)
 
 
-def reinforce_train(agent: Any, env: Any, optimizer: Any, num_episodes: int = 1000, gamma: float = 0.99):
+def reinforce_train(agent: Any, env: Any, optimizer: Any, num_episodes: int = 1000, gamma: float = 0.99) -> None:
     agent.train()
     for episode in tqdm(range(num_episodes)):
         state = env.reset(seed=reinforce_conf.env_seed)[0]
@@ -106,7 +106,7 @@ def reinforce_train(agent: Any, env: Any, optimizer: Any, num_episodes: int = 10
             print(f'Episode: {episode}, loss: {policy_loss}, reward: {np.mean(rewards)}')
 
 
-def test_policy(agent, env, num_episodes: int = 10):
+def test_policy(agent: Any, env: Any, num_episodes: int = 10) -> None:
     agent.eval()
     rewards = []
     for episode in tqdm(range(num_episodes)):
